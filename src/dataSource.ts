@@ -6,7 +6,8 @@ const AppDataSource = new DataSource({
   type: 'sqlite',
   database: ':memory:',
   entities: [Property],
-  synchronize: true, // synchronize the database schema with the entity classes
+  // synchronize the database schema with the entity classes
+  synchronize: true,
 });
 
 export default AppDataSource;
