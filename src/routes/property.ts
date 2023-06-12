@@ -8,15 +8,13 @@ export const propertyRoutes = express.Router();
 propertyRoutes.use(bodyParser.json());
 
 propertyRoutes.get('/', async (req, res, next) => {
-  let response;
   try {
-    response = await PropertyController.list(req.query);
+    const response = await PropertyController.list(req.query);
+    return res.status(200).json(response);
   } catch (error) {
     // Pass the error to the error handling middleware
     next(error);
   }
-
-  res.status(200).json(response);
 });
 
 propertyRoutes.get('/:id', async (req, res, next) => {
@@ -27,7 +25,7 @@ propertyRoutes.get('/:id', async (req, res, next) => {
       return res.status(404).send({}).json();
     }
 
-    res.status(200).send(response).json();
+    return res.status(200).send(response).json();
   } catch (error) {
     // Pass the error to the error handling middleware
     next(error);
@@ -42,7 +40,7 @@ propertyRoutes.post('/', async (req, res, next) => {
     }
 
     const response = await PropertyController.create(req.body);
-    res.status(200).send(response).json();
+    return res.status(200).send(response).json();
   } catch {
     next();
   }
@@ -61,7 +59,7 @@ propertyRoutes.put('/:id', async (req, res, next) => {
       return res.status(404).send({}).json();
     }
 
-    res.status(200).send(response).json();
+    return res.status(200).send(response).json();
   } catch {
     next();
   }
@@ -75,7 +73,7 @@ propertyRoutes.delete('/:id', async (req, res, next) => {
       return res.status(404).send({}).json();
     }
 
-    res.status(204).send({}).json();
+    return res.status(204).send({}).json();
   } catch (error) {
     // Pass the error to the error handling middleware
     next(error);

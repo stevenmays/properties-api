@@ -23,5 +23,5 @@ export function errorHandler(
   console.error(err);
 
   // Send the error response
-  res.status(statusCode).json({ error: message });
+  return res.status(statusCode).json({ error: message });
 }
